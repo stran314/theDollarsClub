@@ -1,0 +1,61 @@
+{% extends 'accounts/main.html' %}
+{% block anon %}
+<br>
+
+<div class="productsInfo">
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <h5>Services</h5>
+      </div>
+      <div class="card card-body">
+        <table class="table">
+          <tr>
+            <th>Service</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Description</th>
+          </tr>
+
+          {% for service in services %}
+            <tr>
+              <td>{{service.name}}</td>
+              <td>{{service.price}}</td>
+              <td>{{service.category}}</td>
+              <td>{{service.description}}</td>
+            </tr>
+          {% endfor %}
+
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <h5>Drinks</h5>
+      </div>
+      <div class="card card-body">
+        <table class="table">
+          <tr>
+            <th>Drink</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Description</th>
+          </tr>
+
+          {% for drink in drinks %}
+            <tr>
+              <td>{{drink.name}}</td>
+              <td>{{drink.price}}</td>
+              <td>{{drink.category}}</td>
+              <td>{{drink.description}}</td>
+            </tr>
+          {% endfor %}
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+<br>
+<div class="customerInfo">
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <h5>Customer:</h5>
+        <h1 style="color: #bc916f; text-align: center;">{{customer.name}}</h1>
+        <hr>
+        <h5>Contact Information:</h5>
+        <p style="color: #bc916f; text-align: center;">{{customer.email}}</p>
+        <p style="color: #bc916f; text-align: center;">{{customer.phone}}</p>
+        <hr>
+        <a class="btn btn-outline-info  btn-lg btn-block" href="">Update Customer</a>
+      </div>
+    </div>
+
+    <div class="col-md">
+      <div class="card card-body">
+        <h5>Total Orders:</h5>
+        <hr>
+        <h1 style="color: #bc916f; text-align: center;">{{order_count}}</h1>
+        <hr>
+        <h5>Reservations:</h5>
+        <hr>
+        <h1 style="color: #bc916f; text-align: center;">{{reserv_count}}</h1>
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <div class="row">
+    <div class="col">
+      <div class="card card-body">
+        <h3 style="color: #fff;">Filter Search</h3>
+        <form style="color: #bc916f; font-size: 20px;" action="" method="GET">
+            <span style="color: #bc916f;">Product: {{myFilter.form.product}}</span>
+            <span style="color: #bc916f;">Status: {{myFilter.form.status}}</span>
+            {{myFilter.form.note}}
+            {{myFilter.form.start_date}}
+            {{myFilter.form.end_date}}
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="customerOrder">
+  <br>
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <table class="table table-sm">
+          <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Notes</th>
+              <th>Date Orderd</th>
+              <th>Status</th>
+              <th>Update</th>
+              <th>Remove</th>
+          </tr>
+          {% for order in orders %}
+            <tr>
+              <th style="color: #bc916f;">{{order.product}}</th>
+              <th style="color: #bc916f;">{{order.product.category}}</th>
+              <th style="color: #bc916f;">{{order.note}}</th>
+              <th style="color: #bc916f;">{{order.date_created}}</th>
+              <th style="color: #bc916f;">{{order.status}}</th>
+              <th><a class="btn btn-outline-info  btn-md" href="{% url 'update_order' order.id %}">Update</a></th>
+              <th><a class="btn btn-outline-danger  btn-md" href="{% url 'delete_order' order.id %}">Delete</a></th>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

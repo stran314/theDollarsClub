@@ -1,0 +1,169 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% load accounts_extras %}
+{% block content %}
+<br>
+<div class="user_page">
+  <br>
+  <div class="row text-center">
+    <div class="col-sm">
+      <a class="click-card" href="#">
+      <div class="card card-body">
+          <h5>Membership</h5>
+          <br>
+          {% if user|has_group:"non-member" %}
+            <h5 style="color:#fff; text-align: center; font-size: 20px;">Non-Member</h5>
+          {% endif %}
+          {% if user|has_group:"bronze" %}
+            <img class="mx-auto d-block" style="width: 40%;" style="max-width: 30px; height: auto;" src='{% static "accounts/images/bronze.png" %}'>
+          {% endif %}
+          {% if user|has_group:"silver" %}
+            <img class="mx-auto d-block" style="width: 40%;" src='{% static "accounts/images/silver.png" %}'>
+          {% endif %}
+          {% if user|has_group:"gold" %}
+            <img class="mx-auto d-block" style="width: 40%;" src='{% static "accounts/images/gold.png" %}'>
+          {% endif %}
+          {% if user|has_group:"platinum" %}
+            <img class="mx-auto d-block" style="width: 40%;" src='{% static "accounts/images/platinum.png" %}'>
+          {% endif %}
+          {% if user|has_group:"diamond" %}
+            <img class="mx-auto d-block" style="width: 40%;" src='{% static "accounts/images/diamond.png" %}'>
+          {% endif %}
+          {% if user|has_group:"dollars" %}
+            <img class="mx-auto d-block" style="width: 40%;" src='{% static "accounts/images/dollars.png" %}'>
+          {% endif %}
+        </div>
+      </a>
+    </div>
+
+    <div class="col-sm">
+      <a class="click-card" href="#">
+        <div class="card card-body">
+          <h5>Total Pending</h5>
+          <hr>
+          <h1 class="fade-in" style="color: #bc916f; text-align: center;">{{pending}}</h1>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-sm">
+      <a class="click-card" href="#">
+        <div class="card card-body">
+          <h5>Total Reservations</h5>
+          <hr>
+          <h1 class="fade-in" style="color: #bc916f; text-align: center;">{{reserved}}</h1>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-sm">
+      <a class="click-card" href="#">
+        <div class="card card-body">
+          <h5>Total Spending</h5>
+          <hr>
+          <h1 class="fade-in" style="color: #85bb65; text-align: center;">${{total_spending.prod_sum}}</h1>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<br>
+<div class="userReserv">
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <h2 style="color: #fff;">Approved Reservations</h2>
+        <table class="table table-sm">
+          <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Notes</th>
+              <th>Date Ordered</th>
+              <th>Status</th>
+          </tr>
+          {% for reserv in reservations %}
+            <tr>
+              <th style="color: #bc916f;">{{reserv.product}}</th>
+              <th style="color: #bc916f;">{{reserv.product.category}}</th>
+              <th style="color: #bc916f;">{{reserv.note}}</th>
+              <th style="color: #bc916f;">{{reserv.date_created}}</th>
+              <th style="color: #bc916f;">{{reserv.status}}</th>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="userReserv">
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <h2 style="color: #fff;">Pending Reservations</h2>
+        <table class="table table-sm">
+          <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Notes</th>
+              <th>Date Ordered</th>
+              <th>Status</th>
+          </tr>
+          {% for pend in pending_orders %}
+            <tr>
+              <th style="color: #bc916f;">{{pend.product}}</th>
+              <th style="color: #bc916f;">{{pend.product.category}}</th>
+              <th style="color: #bc916f;">{{pend.note}}</th>
+              <th style="color: #bc916f;">{{pend.date_created}}</th>
+              <th style="color: #bc916f;">{{pend.status}}</th>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="userOrders">
+  <div class="row">
+    <div class="col">
+      <div class="card card-body">
+        <h2 style="color: #fff;">Order History</h2>
+        <h5 style="color: #fff;">Filter Search</h5>
+        <form style="color: #bc916f; font-size: 20px;" action="" method="GET">
+            <span style="color: #bc916f;">Product: {{myFilter.form.product}}</span>
+            <span style="color: #bc916f;">Status: {{myFilter.form.status}}</span>
+            {{myFilter.form.note}}
+            {{myFilter.form.start_date}}
+            {{myFilter.form.end_date}}
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <table class="table table-sm">
+          <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Notes</th>
+              <th>Date Ordered</th>
+              <th>Status</th>
+          </tr>
+          {% for order in orders %}
+            <tr>
+              <th style="color: #bc916f;">{{order.product}}</th>
+              <th style="color: #bc916f;">{{order.product.category}}</th>
+              <th style="color: #bc916f;">{{order.note}}</th>
+              <th style="color: #bc916f;">{{order.date_created}}</th>
+              <th style="color: #bc916f;">{{order.status}}</th>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

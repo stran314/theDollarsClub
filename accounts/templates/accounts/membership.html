@@ -1,0 +1,73 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block anon %}
+<br>
+<div class="container">
+<div class="membership">
+  <div class="row">
+    <div class="col-sm">
+      <a class="click-card-m" href="#">
+      <div class="card card-body">
+          <h5>Bronze Status</h5>
+          <h5 class="fade-in" style="color: #bc916f; text-align: center;">Cost: $10 /mo</h5>
+          <br>
+          <img class="profile-banner-home" src='{% static "accounts/images/bronze.png" %}'>
+        </div>
+      </a>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm">
+      <a class="click-card-m" href="#">
+        <div class="card card-body">
+          <h5>Silver Status</h5>
+          <h5 class="fade-in" style="color: #bc916f; text-align: center;">Cost: $50 /mo</h5>
+          <br>
+          <img class="profile-banner-home" src='{% static "accounts/images/silver.png" %}'>
+        </div>
+      </a>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm">
+      <a class="click-card-m" href="#">
+        <div class="card card-body">
+          <h5>Gold Status</h5>
+          <h5 class="fade-in" style="color: #bc916f; text-align: center;">Cost: $1,000 /year</h5>
+          <br>
+          <img class="profile-banner-home" src='{% static "accounts/images/gold.png" %}'>
+        </div>
+      </a>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm">
+      <a class="click-card-m" href="#">
+        <div class="card card-body">
+          <h5>Diamond Status</h5>
+          <h5 class="fade-in" style="color: #bc916f; text-align: center;">Cost: $5,000 /year</h5>
+          <br>
+          <img class="profile-banner-home" src='{% static "accounts/images/diamond.png" %}'>
+        </div>
+      </a>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm">
+      <a class="click-card-m" href="#">
+        <div class="card card-body">
+          <h5>Dollars Status</h5>
+          <h5 class="fade-in" style="color: #bc916f; text-align: center;">Cost: $10,000 /year</h5>
+          <br>
+          <img class="profile-banner-home" src='{% static "accounts/images/dollars.png" %}'>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

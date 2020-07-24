@@ -1,0 +1,24 @@
+{% extends 'accounts/main.html' %}
+
+{% load static %}
+{% load accounts_extras %}
+{% block content %}
+<br>
+<div class="row justify-content-center">
+	<div class="col-md-6">
+		<div class="card card-body">
+      <form style="color: #bc916f; font-size: 20px;" action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+				{% if request.user|has_group:'admin' %}
+        	<input class="btn btn-block btn-lg btn-outline-info" style="float: right; letter-spacing: 2px;" type="submit" name="Submit">
+				{% endif %}
+			</form>
+			{% if request.user|has_group:'demo' %}
+				<h5 style="border: 1px solid; border-radius: 10px; text-align: center; color: #17a2b8; padding: 5px;">Submit</h5>
+				<h5 style="color: #dc3545; text-align: center;">DEMO ONLY</h5>
+			{% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

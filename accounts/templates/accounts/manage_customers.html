@@ -1,0 +1,35 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+<br>
+<div class="manageCustomers">
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <h1 style="color: #fff;">Customers</h1>
+      </div>
+      <div class="card card-body">
+        <table class="table">
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Date Created</th>
+          </tr>
+
+          {% for customer in customers %}
+            <tr>
+              <td><a href="{% url 'customer' customer.id %}">View</a></td>
+              <td>{{customer.name}}</td>
+              <td>{{customer.email}}</td>
+              <td>{{customer.phone}}</td>
+              <td>{{customer.date_created}}</td>
+            </tr>
+          {% endfor %}
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

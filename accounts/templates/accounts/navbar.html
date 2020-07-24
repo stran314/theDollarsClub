@@ -1,0 +1,88 @@
+{% load static %}
+{% load accounts_extras %}
+<style>
+  .hello-msg {
+    font-size: 18px;
+    color: #fff;
+    margin-right: 20px;
+    margin-top: 15px;
+    float: right;
+  }
+
+</style>
+
+<nav class="navbar navbar-expand navbar-dark py-1 fixed-top" style="background-color: #0e1414;">
+  {% if user|has_group:"admin" %}
+    <a class="navbar-brand" href="{% url 'dashboard' %}"><img src='{% static "accounts/images/dollarsInfinIcon.png" %}'></a>
+  {% endif %}
+  {% if user|has_group:"customer" %}
+    <a class="navbar-brand" href="{% url 'user-page' %}"><img src='{% static "accounts/images/dollarsInfinIcon.png" %}'></a>
+  {% endif %}
+  {% if user.is_anonymous%}
+    <a class="navbar-brand" href="{% url 'home' %}"><img src='{% static "accounts/images/dollarsInfinIcon.png" %}'></a>
+  {% endif %}
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto">
+      {% if user.is_authenticated %}
+        <li>
+          <label for="check">
+            <i class="fas fa-bars" id="sidebar-btn"></i>
+          </label>
+        </li>
+      {% endif %}
+      {% if user.is_anonymous %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'membership' %}">Membership</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'products' %}">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/#section-contact">Contact</a>
+        </li>
+      {% endif %}
+    </ul>
+    <ul class="navbar-nav">
+      {% if request.user.is_authenticated %}
+        <img class="profile-pic-nav" src="{{request.user.customer.profile_pic.url}}">
+        {% if user|has_group:"bronze" %}
+          <img class="profile-banner-nav" src='{% static "accounts/images/bronze.png" %}'>
+        {% endif %}
+        {% if user|has_group:"silver" %}
+          <img class="profile-banner-nav" src='{% static "accounts/images/silver.png" %}'>
+        {% endif %}
+        {% if user|has_group:"gold" %}
+          <img class="profile-banner-nav" src='{% static "accounts/images/gold.png" %}'>
+        {% endif %}
+        {% if user|has_group:"platinum" %}
+          <img class="profile-banner-nav" src='{% static "accounts/images/platinum.png" %}'>
+        {% endif %}
+        {% if user|has_group:"diamond" %}
+          <img class="profile-banner-nav" src='{% static "accounts/images/diamond.png" %}'>
+        {% endif %}
+        {% if user|has_group:"dollars" %}
+          <img class="profile-banner-nav" src='{% static "accounts/images/dollars.png" %}'>
+        {% endif %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{request.user}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="color: #fff; background-color: #0e1414;">
+            <span><a class="dropdown-item" href="{% url 'logout' %}" style="color: #fff; background-color: #0e1414;">Logout</a></span>
+          </div>
+        </li>
+      {% endif %}
+      {% if user.is_anonymous %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

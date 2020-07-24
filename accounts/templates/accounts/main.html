@@ -1,0 +1,84 @@
+{% load static %}
+{% load accounts_extras %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Dollars</title>
+  <link rel="icon" href="{% static 'accounts\images\dollarsInfinIcon.png' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/066530bfa7.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+  <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/sidebar.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/main.css' %}">
+  {{ form.media }}
+</head>
+<body>
+  {% if request.user.is_authenticated %}
+    <input type="checkbox" id="check" checked>
+
+    {% include 'accounts/navbar.html' %}
+
+    <div class="wrapper">
+      <div class="sidebar">
+        <img class="profile-pic-side" src="{{request.user.customer.profile_pic.url}}">
+        {% if user|has_group:"non-member" %}
+          <h5 style="color:#fff; text-align: center; font-size: 13px;">Non-Member</h5>
+        {% endif %}
+        {% if user|has_group:"bronze" %}
+          <img class="profile-banner-side" src='{% static "accounts/images/bronze.png" %}'>
+        {% endif %}
+        {% if user|has_group:"silver" %}
+          <img class="profile-banner-side" src='{% static "accounts/images/silver.png" %}'>
+        {% endif %}
+        {% if user|has_group:"gold" %}
+          <img class="profile-banner-side" src='{% static "accounts/images/gold.png" %}'>
+        {% endif %}
+        {% if user|has_group:"platinum" %}
+          <img class="profile-banner-side" src='{% static "accounts/images/platinum.png" %}'>
+        {% endif %}
+        {% if user|has_group:"diamond" %}
+          <img class="profile-banner-side" src='{% static "accounts/images/diamond.png" %}'>
+        {% endif %}
+        {% if user|has_group:"dollars" %}
+          <img class="profile-banner-side" src='{% static "accounts/images/dollars.png" %}'>
+        {% endif %}
+        <ul>
+          {% if request.user|has_group:'customer' %}
+            <li><a href="{% url 'user-page' %}"><i class="fas fa-user"></i><span>Account</span></a></li>
+            <li><a href="{% url 'account_settings' %}"><i class="fas fa-user-cog"></i><span>Settings</span></a></li>
+            <li><a href="{% url 'make_reserv' %}"><i class="fas fa-calendar-check"></i><span>Reservations</span></a></li>
+          {% endif %}
+          {% if request.user.is_staff %}
+            <li><a href="{% url 'dashboard' %}"><i class="fas fa-house-user"></i><span>Dashboard</span></a></li>
+            <li><a href="{% url 'customers' %}"><i class="fas fa-users"></i><span>Customers</span></a></li>
+            <li><a href="{% url 'orders' %}"><i class="fas fa-clipboard-list"></i><span>Orders</span></a></li>
+            <li><a href="{% url 'inventory' %}"><i class="fas fa-box-open"></i><span>Inventory</span></a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="main_content">
+        <div class="content">
+          {% block content %}
+
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% if request.user.is_anonymous %}
+    {% include 'accounts/navbar.html' %}
+    {% block anon %}
+
+    {% endblock %}
+    <hr>
+    <p style="color: #fafafa; font-size: 12px; text-align: center;">©theDollars | (777)777-7777 | thedollarsnightclub@gmail.com</p>
+  {% endif %}
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>

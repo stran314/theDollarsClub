@@ -1,0 +1,151 @@
+{% extends 'accounts/main.html' %}
+
+{% load static %}
+
+{% block content %}
+<br>
+<div class="dashboard">
+  <div class="row">
+    <div class="col-sm">
+      <a class="click-card" href="{% url 'customers' %}">
+      <div class="card card-body">
+          <h5>Total Customers</h5>
+          <hr>
+          <h1 class="fade-in" style="color: #bc916f; text-align: center;">{{total_customers}}</h1>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-sm">
+      <a class="click-card" href="{% url 'orders' %}">
+        <div class="card card-body">
+          <h5>Total Orders</h5>
+          <hr>
+          <h1 class="fade-in" style="color: #bc916f; text-align: center;">{{total_orders}}</h1>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-sm">
+      <a class="click-card" href="{% url 'total-sales' %}">
+        <div class="card card-body">
+          <h5>Total Sales</h5>
+          <hr>
+          <h1 class="fade-in" style="color: #bc916f; text-align: center;">{{total_sales}}</h1>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-sm">
+      <a class="click-card" href="#">
+        <div class="card card-body">
+          <h5>Total Revenue</h5>
+          <hr>
+          <h1 class="fade-in" style="color: #85bb65; text-align: center;">${{total_revenue.prod_sum}}</h1>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <h5>Recent Customers</h5>
+        <hr>
+        <div class="table-scroll">
+          <table class="table">
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Date Created</th>
+            </tr>
+
+            {% for customer in recent_customers %}
+              <tr>
+                <td><a class="buttons" href="{% url 'customer' customer.id %}">View</a></td>
+                <td>{{customer.name}}</td>
+                <td>{{customer.phone}}</td>
+                <td>{{customer.email}}</td>
+                <td>{{customer.date_created}}</td>
+              </tr>
+            {% endfor %}
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm">
+      <a class="click-card" href="{% url 'pending' %}">
+      <div class="card card-body">
+        <h5>Pending</h5>
+        <hr>
+        <h1 class="fade-in" style="color: #bc916f; text-align: center;">{{pending}}</h1>
+      </div>
+      </a>
+    </div>
+
+    <div class="col-sm">
+      <a class="click-card" href="{% url 'reserved' %}">
+        <div class="card card-body">
+          <h5>Reserved</h5>
+          <hr>
+          <h1 class="fade-in" style="color: #bc916f; text-align: center;">{{reserved}}</h1>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-sm">
+      <a class="click-card" href="{% url 'in-use' %}">
+        <div class="card card-body">
+          <h5>In Use</h5>
+          <hr>
+          <h1 class="fade-in" style="color: #bc916f; text-align: center;">{{in_use}}</h1>
+        </div>
+      </a>
+    </div>
+  </div>
+<br>
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <h5 style="color: #fff; font-size: 30px;">Recent Orders</h5>
+        <div id="div">
+          <a class="buttons" style="letter-spacing: 3px; display: block; text-align:center;" href="{% url 'create_order' %}">Create Order</a>
+        </div>
+        <hr>
+        <div class="table-scroll">
+          <table class="table">
+            <tr>
+              <th>Customer</th>
+              <th>Product</th>
+              <th>Note</th>
+              <th>Status</th>
+              <th>Date Created</th>
+              <th>Update</th>
+              <th>Remove</th>
+            </tr>
+            {% for order in recent_orders %}
+              <tr>
+                <td style="color: #bc916f; font-size: 20px;">{{order.customer}}</td>
+                <td style="color: #bc916f; font-size: 20px;">{{order.product}}</td>
+                <td style="color: #bc916f; font-size: 20px;">{{order.note}}</td>
+                <td style="color: #bc916f; font-size: 20px;">{{order.status}}</td>
+                <td style="color: #bc916f; font-size: 20px;">{{order.date_created}}</td>
+                <td><a class="btn btn-outline-info  btn-md" href="{% url 'update_order' order.id %}">Update</a></td>
+                <td><a class="btn btn-outline-danger  btn-md" href="{% url 'delete_order' order.id %}">Remove</a></td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

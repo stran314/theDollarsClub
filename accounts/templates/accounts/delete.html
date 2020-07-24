@@ -1,0 +1,26 @@
+{% extends 'accounts/main.html' %}
+
+{% load static %}
+{% load accounts_extras %}
+
+{% block content %}
+<br>
+<div class="row justify-content-center">
+	<div class="col-md-6">
+		<div class="card card-body">
+      <p style="color: #bc916f; font-size: 20px;"> Are you sure you want to delete "{{item}}"?</p>
+      <form action="{% url 'delete_order' item.id %}" method="POST">
+        {% csrf_token %}
+        <a class="btn btn-outline-info" href="{% url 'dashboard' %}">Cancel</a>
+				{% if request.user|has_group:'admin' %}
+        	<input class="btn btn-outline-danger" type="submit" name="Confirm">
+				{% endif %}
+      </form>
+			{% if request.user|has_group:'demo' %}
+				<h5 style="color: #dc3545; border: 1px solid; border-radius: 5px; padding: 5px; width: 12%; margin-top: 20px;">Confirm</h5>
+				<h5 style="color: #dc3545;">DEMO ONLY</h5>
+			{% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
