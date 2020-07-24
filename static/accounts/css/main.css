@@ -1,0 +1,426 @@
+{% load static %}
+
+<style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: Garamond, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+      background-color: #060808;
+    }
+
+    .fade-in {
+      animation: fadeIn 3s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 0.85;
+      }
+    }
+
+    .profile-pic-side{
+      display: block;
+  		max-width: 130px;
+  		max-height: 130px;
+  		margin: 0 auto;
+  		border-radius: 50%;
+      padding-bottom: 20px;
+  	}
+
+    .profile-banner-side{
+      position: absolute;
+  		width: 105px;
+      margin: 0 auto;
+      top: 95px;
+      left: 48px;
+  	}
+
+    .profile-pic-nav{
+  		max-width: 60px;
+  		max-height: 60px;
+  		border-radius: 50%;
+      float: right;
+      z-index: -2;
+  	}
+
+    .profile-banner-nav{
+      position: absolute;
+      top: 35px;
+      padding-right: 6px;
+  		width: 65px;
+      z-index: -1;
+  	}
+
+    .profile-pic{
+  		max-width: 200px;
+  		max-height:200px;
+  		margin: 0 auto;
+  		border-radius: 50%;
+  	}
+
+    /*membership.html*/
+
+    .profile-banner-home{
+      position: absolute;
+  		width: 105px;
+      margin: 0 auto;
+      top: 55px;
+      left: 30px;
+  	}
+
+    .membership {
+      margin-top: 50px;
+    }
+
+    .membership h5{
+      color: #fff;
+    }
+
+    .membership .click-card-m {
+      text-decoration: none;
+    }
+
+    .membership .click-card-m .card:hover {
+      border: 1px solid;
+      border-color: #bc916f;
+    }
+
+    /*sidebar.css*/
+
+    label #sidebar-btn {
+      z-index: 1;
+      color: #fff;
+      position: fixed;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    #check:checked ~ .wrapper {
+      left: -155px;
+    }
+
+    #check:checked ~ .wrapper .sidebar ul li a span {
+      display: none;
+    }
+
+    #check:checked ~ .wrapper .sidebar ul li a {
+      margin-left: 155px;
+    }
+
+    #check:checked ~ .wrapper .main_content {
+      width: 94%;
+    }
+
+    #check {
+      display: none;
+    }
+
+    /*navbar.html*/
+    .nav-link {
+      font-family: Garamond, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+      font-size: 20px;
+      letter-spacing:5px;
+      color: #fafafa;
+    }
+
+    .nav-link:hover {
+      color: #bc916f;
+    }
+
+    .navbar-brand img {
+      width: 90px;
+
+    }
+    .navbar-brand {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /*home.html*/
+    #showcase {
+      background-image: url("https://s3.amazonaws.com/thedollars-bucket/accounts/images/Vatican.jpg");
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .box{
+      position: relative;
+      display: inline-block;
+    }
+    .box .text {
+      position: absolute;
+      z-index: 999;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      top: 40%;
+      text-align: center;
+      width: 60%;
+    }
+
+    #showcase h1{
+      font-size: 50px;
+      line-height: 1.2;
+      text-shadow: 2px 2px #000000;
+      color: #fff;
+
+    }
+
+    #showcase p{
+      font-size: 15px;
+      color: #fff;
+    }
+
+    #showcase .button{
+      font-size: 18px;
+      text-decoration: none;
+      color: #fff;
+      border: #fff 1px solid;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    #showcase .button:hover {
+      background: #fff;
+      color: #c58d61;
+    }
+    #section-a,
+    #section-b,
+    #section-c,
+    #section-d {
+      background-color: #161815;
+      color: #bc916f;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #section-contact {
+      background-color: #161815;
+      color: #bc916f;
+      padding: 20px;
+      text-align: center;
+      padding: 250px;
+    }
+
+    #section-bar {
+      background-image: url("/static/accounts/images/bar-glass-wine.jpg");
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    #section-clubs {
+      background-image: url("/static/accounts/images/Clubs.jpg");
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    #section-services {
+      background-image: url("/static/accounts/images/Service.jpg");
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    #section-wine-cellar {
+      background-image: url("/static/accounts/images/WineCellar.jpg");
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    /*user.html*/
+    .user_page h5 {
+      color: #fff;
+      font-size: 30px;
+    }
+
+    .user_page .click-card {
+      text-decoration: none;
+    }
+
+    .user_page .click-card .card:hover {
+      border: 1px solid;
+      border-color: #bc916f;
+    }
+
+    /*dashboard.html*/
+    .dashboard h5 {
+      color: #fff;
+      font-size: 30px;
+    }
+
+    .dashboard td {
+      color: #bc916f;
+      font-size: 20px;
+    }
+    .table-scroll {
+      overflow: auto;
+    }
+    .dashboard .buttons {
+      color: #bc916f;
+      font-size: 17px;
+      border: 1px solid;
+      border-radius: 2px;
+      padding: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      font-weight: bold;
+    }
+
+    .dashboard .buttons:hover {
+      background-color: #bc916f;
+      color: #0e1414;
+      text-decoration: none;
+    }
+
+    .dashboard .click-card {
+      text-decoration: none;
+    }
+
+    .dashboard .click-card .card:hover {
+      border: 1px solid;
+      border-color: #bc916f;
+    }
+
+    /*products.html*/
+    .productsInfo {
+      margin-top: 40px;
+    }
+    .productsInfo h5 {
+      color: #fff;
+      font-size: 30px;
+    }
+
+    .productsInfo td, th {
+      color: #fff;
+      font-size: 20px;
+    }
+
+    /*inventory.html*/
+    .inventoryInfo h5 {
+      color: #fff;
+      font-size: 30px;
+    }
+
+    .inventoryInfo td, th {
+      color: #fff;
+      font-size: 20px;
+    }
+
+    /*customer.html*/
+    .customerInfo h5, p, th {
+      color: #fff;
+    }
+
+    .card {
+      background-color: #232929;
+    }
+
+    /*manage_customers.html*/
+    .manageCustomers td {
+      color: #bc916f;
+    }
+
+    .manageCustomers a {
+      color: #bc916f;
+      font-size: 17px;
+      border: 1px solid;
+      border-radius: 2px;
+      padding: 5px;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    .manageCustomers a:hover {
+      background-color: #bc916f;
+      color: #0e1414;
+      text-decoration: none;
+    }
+    /*manage_orders.html*/
+    .manageOrders td {
+      color: #bc916f;
+    }
+    /*Form styling*/
+    .form-control {
+      color: #c7c7c7;
+      background-color: #232929;
+      text-align: center;
+    }
+    .form-control option{
+      color: #c7c7c7;
+      background-color: #232929;
+    }
+
+    .filter-control {
+      font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #fff;
+      background-color: #0e1414;
+    }
+
+    .filter-control option{
+      color: #c7c7c7;
+      background-color: #0e1414;
+    }
+
+    /*reservation.html*/
+    .datepicker table tr th.picker-switch,
+    .datepicker table tr th.dow {
+      color: black;
+    }
+    .bootstrap-datetimepicker-widget.dropdown-menu {
+      width: 18rem !important;
+    }
+
+    .datepicker table tr td.timepicker.timepicker-picker.timepicker-second {
+      display: none;
+    }
+
+    .datepicker table tr td.active:active,
+    .datepicker table tr td.active.highlighted:active,
+    .datepicker table tr td.active.active,
+    .datepicker table tr td.active.highlighted.active {
+      background-color: green;
+    }
+</style>
