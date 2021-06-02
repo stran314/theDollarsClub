@@ -26,6 +26,6 @@ pywin32-ctypes==0.2.0
 s3transfer==0.3.3
 six==1.15.0
 sqlparse==0.3.1
-urllib3==1.25.9
+urllib3==1.26.5
 virtualenv==20.0.25
 whitenoise==5.1.0
